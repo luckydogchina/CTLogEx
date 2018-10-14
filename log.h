@@ -3,19 +3,12 @@
 
 #include "CTLogEx.h"
 
-#ifndef _DEBUG //ÓÃ»§ÈÕÖ¾Ô¤±àÒëºê
+#ifndef _DEBUG //ï¿½Ã»ï¿½ï¿½ï¿½Ö¾Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½
 #define TRACE
-#define ERROR
-#define WARN_1
-#define WARN_2
-#define WARN_3
-#define WARN_4
-#define WARN_5
-#define WARN_6
 #else
-
 #define TRACE ctrace(("(%s %s, %s, %d) :"), __DATE__,__TIME__ ,__FUNCTION__, __LINE__);\
-											ctrace		
+											ctrace	
+#endif	
 
 #ifdef WIN32
 #define ERROR(x, ...)	cwarn(0, ("(%s %s, %s, %d) :"), __DATE__, __TIME__ ,__FUNCTION__, __LINE__);\
@@ -33,7 +26,7 @@
 #define WARN_6(x, ...)	cwarn(6, ("(%s %s, %s, %d) :"),__DATE__ ,__TIME__ ,__FUNCTION__, __LINE__);\
 											cwarn(6, x , ##__VA_ARGS__)
 
-#else ifdef UNIX
+#elif UNIX
 
 #define ERROR(x, args...)	cwarn(0, ("(%s %s, %s, %d) :"), __DATE__, __TIME__ ,__FUNCTION__, __LINE__);\
 											cwarn(0, x , ##args)	
@@ -49,11 +42,18 @@
 											cwarn(5, x , ##args) 	
 #define WARN_6(x, args...)	cwarn(0, ("(%s %s, %s, %d) :"), __DATE__, __TIME__ ,__FUNCTION__, __LINE__);\
 											cwarn(6, x , ##args)
+#else
+#define WARN_1
+#define WARN_2
+#define WARN_3
+#define WARN_4
+#define WARN_5
+#define WARN_6
+#define ERROR
 
 #endif
 
 #endif
 
-#endif
 
 //#endif // !__OPERATION_H__
